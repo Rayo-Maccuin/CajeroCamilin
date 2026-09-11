@@ -6,10 +6,14 @@ function Teclado({
   maxLength,
   oculto = false,
   confirmDisabled,
-  onConfirm
+  onConfirm,
+  validarTecla = () => true
 }) {
   const agregar = (numero) => {
-    if (valor.length >= maxLength) {
+    if (
+      valor.length >= maxLength ||
+      !validarTecla(valor + numero)
+    ) {
       return;
     }
 
@@ -45,6 +49,12 @@ function Teclado({
         {teclas.map((tecla) => (
           <button
             key={tecla}
+            disabled={
+              tecla !== 'C' &&
+              tecla !== 'B' &&
+              (valor.length >= maxLength ||
+                !validarTecla(valor + tecla))
+            }
             onClick={() => {
               if (tecla === 'C') {
                 limpiar();

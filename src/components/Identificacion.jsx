@@ -7,7 +7,8 @@ import {
 } from '../data/cajero';
 import {
   validarClave,
-  validarIdentificacion
+  validarIdentificacion,
+  validarPrefijoIdentificacion
 } from '../logic/validaciones';
 
 function Identificacion({
@@ -172,6 +173,9 @@ function Identificacion({
             setValor={setIdentificacion}
             maxLength={informacion.longitud}
             confirmDisabled={procesando || identificacion.length !== informacion.longitud}
+            validarTecla={(valorSiguiente) =>
+              validarPrefijoIdentificacion(tipo, valorSiguiente)
+            }
             onConfirm={confirmarIdentificacion}
           />
         </>

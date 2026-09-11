@@ -32,6 +32,26 @@ export function validarIdentificacion(tipo, numero) {
   }
 }
 
+export function validarPrefijoIdentificacion(tipo, numero) {
+  if (!/^\d*$/.test(numero)) {
+    return false;
+  }
+
+  switch (tipo) {
+    case 'celular':
+      return numero === '' || /^3\d*$/.test(numero);
+
+    case 'ahorro_mano':
+      return numero === '' || /^[01]$/.test(numero) || /^[01]3\d*$/.test(numero);
+
+    case 'cuenta_ahorros':
+      return true;
+
+    default:
+      return false;
+  }
+}
+
 export function convertirNumero(numero) {
   return Number(String(numero).replace(/\D/g, ''));
 }
